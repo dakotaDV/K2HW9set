@@ -10,12 +10,12 @@ import java.util.Objects;
     // - В список продуктов можно добавить новый товар, отметить, что он уже куплен, или удалить его из списка.
     //  - Названия всех продуктов должны быть на русском языке.
 
-public class Products {
+public class Product {
     private String productName;
     private double price;
     private double weight;
 
-    public Products(String productName, double price, double weight) {
+    public Product(String productName, double price, double weight) {
         if(productName!=null && !productName.isBlank() && !productName.isEmpty() && price>0 && weight>0 ) {
             this.productName = productName;
             this.price = price;
@@ -26,7 +26,7 @@ public class Products {
         }
     }
 
-    private void addProductsToList(Products products) {
+    private void addProductsToList(Product products) {
     }
 
     @Override
@@ -38,7 +38,7 @@ public class Products {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Products products = (Products) o;
+        Product products = (Product) o;
         return Double.compare(products.price, price) == 0 && Double.compare(products.weight, weight) == 0 && Objects.equals(productName, products.productName);
     }
 
