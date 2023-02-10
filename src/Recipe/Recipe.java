@@ -2,9 +2,7 @@ package Recipe;
 
 import task1.Product;
 
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 //Вам необходимо усложнить задание со списком продуктов из прошлого урока. Создайте класс рецептов, который содержит поля:
 
 //  1. Множество продуктов.
@@ -25,7 +23,7 @@ import java.util.Set;
 
         public class Recipe{
         private final String nameOfRecipe;
-        private final Set<Product> products= new HashSet<>();
+        private final Map<Product, Integer> products= new HashMap<>();
             public String getNameOfRecipe;
             private int totalCostRecipe;
 
@@ -35,13 +33,19 @@ import java.util.Set;
                 //recipe.add(this);
             }
             public void addProductInRecipe(Product product, int requiredQuantity){
-                if(products.contains(product)){
-                    throw new RuntimeException("Продукт уже добавлен в рецепт");
+                if(products.containsKey(product)){
+                    throw new RuntimeException("Something wrong ");
                 }
-                products.add(product);
-              // products.put(product, requiredQuantity);
-               // totalCostRecipe = totalCostRecipe + product.getPrice() * product.getWeight();
+                products.put(product, requiredQuantity);
+                totalCostRecipe = (int) (totalCostRecipe + product.getPrice() * requiredQuantity);
 
+            }
+            public int getCostForProduct(){
+                int sum = 0;
+                for(Product key: products.keySet()){
+                    sum += products.get(key) * key.getPrice();
+                }
+                return sum;
             }
 
             @Override
@@ -76,7 +80,12 @@ import java.util.Set;
                 return totalCostRecipe;
             }
 
-            public Set<Product> getProducts() {
+           // public Set<Product> getProducts() {
+                //return products;
+
+
+            public Map<Product, Integer> getProducts() {
                 return products;
             }
         }
+
